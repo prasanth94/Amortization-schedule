@@ -1,28 +1,7 @@
-== README
+Amortization Schedule
+--------------------------------------------------------------------------------------------------------------------------
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A Rails Application for users to get the amortization schedule for their loan. Users have to input their requested loan amount, term(duration in months), interest rate and request date and the application will output the amortization schedule for the same.
 
-Things you may want to cover:
+Rspec is used for testing. To run the tests execute 'bundle exec rspec'.
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
