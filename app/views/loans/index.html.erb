@@ -1,0 +1,21 @@
+<table class="table table-bordered table-striped">
+  <thead class="thead-default">
+    <tr>
+      <th>Loan Amount</th>
+      <th>Term</th>
+      <th>Interest rate</th>
+      <th>Requested date</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @loans.each do |loan| %>
+    <tr>
+      <td><%= loan.loan_amount %></td>
+      <td><%= loan.term %></td>
+      <td><%= loan.interest_rate %></td>
+      <td><%= loan.request_date %></td>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
