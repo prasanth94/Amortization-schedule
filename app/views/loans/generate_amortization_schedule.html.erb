@@ -1,3 +1,5 @@
+<h3> Loan Details</h3>
+
 <table class="table table-bordered">
   <thead class="thead-inverse">
     <tr>
@@ -12,7 +14,34 @@
       <td><%= @loan.loan_amount %></td>
       <td><%= @loan.term %></td>
       <td><%= @loan.interest_rate %></td>
-      <td><%= @loan.request_date %></td>
+      <td><%= @loan.request_date.strftime("%d %b %Y") %></td>
     </tr>
+  </tbody>
+</table>
+
+
+<h3> Amortization Schedule of the Loan </h3>
+<table class="table table-bordered">
+  <thead class="thead-inverse">
+    <tr>
+      <th>Due Date</th>
+      <th>Beginning Balance</th>
+      <th>Payment Amount</th>
+      <th>Interest Componenet</th>
+      <th>Principal Componenet</th>
+      <th>Remaining Balance</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @amortization_schedule.each do |entry| %>
+    <tr>
+      <td><%= entry[:due_date].strftime("%d %b %Y") %></td>
+      <td><%= entry[:beginning_balance].round(2) %></td>
+      <td><%= entry[:monthly_payment].round(2) %></td>
+      <td><%= entry[:interest_component].round(2) %></td>
+      <td><%= entry[:principal_component].round(2) %></td>
+      <td><%= entry[:ending_balance].round(2) %></td>
+    </tr>
+    <% end %>
   </tbody>
 </table>

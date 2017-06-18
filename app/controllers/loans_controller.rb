@@ -1,3 +1,5 @@
+include CreateAmortizationSchedule
+
 class LoansController < ApplicationController
 	def new
 		@loan = Loan.new
@@ -6,7 +8,7 @@ class LoansController < ApplicationController
 	def generate_amortization_schedule
 		@loan = Loan.new(loan_params)
 		if @loan.save
-			@loans = Loan.all
+			@amortization_schedule = create_amortization_schedule(@loan)
 		else
 			render :new
 		end
