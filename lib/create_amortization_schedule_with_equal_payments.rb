@@ -1,6 +1,6 @@
-module CreateAmortizationSchedule
+module CreateAmortizationScheduleWithEqualPayments
 
-  def create_amortization_schedule(loan)
+  def create_amortization_schedule_with_equal_payments(loan)
   	@loan = loan
   	@amortization_schedule_hash = []
   	@interest_per_period = @loan.interest_rate/(100*12)

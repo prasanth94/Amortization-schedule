@@ -1,4 +1,5 @@
-include CreateAmortizationSchedule
+include CreateAmortizationScheduleWithDifferentFirstPayment
+include CreateAmortizationScheduleWithEqualPayments
 
 class LoansController < ApplicationController
 	def new
@@ -8,7 +9,11 @@ class LoansController < ApplicationController
 	def generate_amortization_schedule
 		@loan = Loan.new(loan_params)
 		if @loan.save
-			@amortization_schedule = create_amortization_schedule(@loan)
+			if @loan.amortization_type == "First month different payment"
+			  @amortization_schedule = create_amortization_schedule_with_different_first_payment(@loan)
+			else
+				@amortization_schedule = create_amortization_schedule_with_equal_payments(@loan)
+			end
 		else
 			render :new
 		end

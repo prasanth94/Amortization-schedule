@@ -30,7 +30,6 @@ RSpec.describe LoansController, type: :controller do
 
     it "redirects to the amortization_schedule page on successful Loan creation" do
       post :generate_amortization_schedule, { loan: params_for_create }
-      
       expect(response).to render_template :generate_amortization_schedule
     end
 
