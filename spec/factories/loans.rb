@@ -6,5 +6,6 @@ FactoryGirl.define do
     interest_rate 1.5
     term 12
     request_date "2017-06-15"
+    amortization_type "Equal payment"
   end
 end

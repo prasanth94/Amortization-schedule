@@ -6,12 +6,16 @@ RSpec.describe Loan, type: :model do
   it { is_expected.to have_db_column(:interest_rate).of_type(:float) }
   it { is_expected.to have_db_column(:request_date).of_type(:date) }
   it { is_expected.to have_db_column(:term).of_type(:integer) }
+  it { is_expected.to have_db_column(:amortization_type).of_type(:string) }
 
  
   it { is_expected.to validate_presence_of :loan_amount }
   it { is_expected.to validate_presence_of :interest_rate }
   it { is_expected.to validate_presence_of :term }
   it { is_expected.to validate_presence_of :request_date }
+  it { is_expected.to validate_presence_of :amortization_type }
+
+  it { is_expected.to validate_inclusion_of(:amortization_type).in_array(['Equal payments', 'First month different payment']) }
 
   it { is_expected.to validate_numericality_of(:loan_amount).is_greater_than(0) }
   it { is_expected.to validate_numericality_of(:loan_amount).only_integer }

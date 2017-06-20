@@ -7,6 +7,7 @@
       <th>Term</th>
       <th>Interest rate</th>
       <th>Requested date</th>
+      <th>Amortization type</th>
     </tr>
   </thead>
   <tbody>
@@ -15,6 +16,7 @@
       <td><%= @loan.term %></td>
       <td><%= @loan.interest_rate %></td>
       <td><%= @loan.request_date.strftime("%d %b %Y") %></td>
+       <td><%= @loan.amortization_type%></td>
     </tr>
   </tbody>
 </table>

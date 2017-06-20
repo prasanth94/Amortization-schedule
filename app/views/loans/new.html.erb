@@ -12,8 +12,12 @@
       <%= f.label :interest_rate %><br> 
       <%= f.text_field :interest_rate, class: 'form-control' %>
 
+      <%= f.label :amortization_type %><br>
+      <%= f.select :amortization_type, "<option>Equal payments</option>
+                  <option>First month different payment</option>".html_safe, class: 'form-control' %><br>
+
       <%= f.label :request_date %><br>
-      <%=  f.date_select :request_date, {:order => [:month, :day, :year],:prompt => true, :start_year => Time.now.year, :end_year => 2000} %><br>
+      <%=  f.date_select :request_date, {:order => [:month, :day, :year],:prompt => true, :start_year => Time.now.year, :end_year => 2000}, class: 'form-control' %><br>
 
       <%= f.submit "Generate Amortization schedule", class: "btn btn-primary"  %>
 
