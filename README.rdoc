@@ -5,3 +5,5 @@ A Rails Application for users to get the amortization schedule for their loan. U
 
 Rspec is used for testing. To run the tests execute 'bundle exec rspec'.
 
+The App is hosted in heroku and is available at: https://amortization-schedule.herokuapp.com/
+
