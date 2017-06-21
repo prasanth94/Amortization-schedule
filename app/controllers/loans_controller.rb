@@ -9,11 +9,7 @@ class LoansController < ApplicationController
 	def generate_amortization_schedule
 		@loan = Loan.new(loan_params)
 		if @loan.save
-			if @loan.amortization_type == "First month different payment"
-			  @amortization_schedule = create_amortization_schedule_with_different_first_payment(@loan)
-			else
-				@amortization_schedule = create_amortization_schedule_with_equal_payments(@loan)
-			end
+			@amortization_schedule = find_amortization_schedule_type
 		else
 			render :new
 		end
@@ -26,8 +22,16 @@ class LoansController < ApplicationController
 
   private
 
-  	def loan_params
-  	  params.require(:loan).permit(:loan_amount, :term, :interest_rate, :request_date, :amortization_type)
- 	 end
+  def loan_params
+    params.require(:loan).permit(:loan_amount, :term, :interest_rate, :request_date, :amortization_type)
+ 	end
+
+ 	def find_amortization_schedule_type
+ 	 	if @loan.amortization_type == "First month different payment"
+			create_amortization_schedule_with_different_first_payment(@loan)
+		else
+			create_amortization_schedule_with_equal_payments(@loan)
+		end
+ 	end
 
 end
