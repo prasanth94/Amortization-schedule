@@ -1,5 +1,6 @@
-<div class="form">
-  <div class="col-md-6 col-md-offset-3">
+<h2> Amortization Schedule Calculator </h2><br>
+<div class="login_div">
+  <div class="login_form">
 
     <%= form_for @loan, url: {action: "generate_amortization_schedule"} do |f| %>
       <%= render 'shared/error_messages', object: @loan  %>
@@ -13,8 +14,7 @@
       <%= f.text_field :interest_rate, class: 'form-control' %>
 
       <%= f.label :amortization_type %><br>
-      <%= f.select :amortization_type, "<option>Equal payments</option>
-                  <option>First month different payment</option>".html_safe, class: 'form-control' %><br>
+      <%= f.select :amortization_type, options_for_select(@amortization_type.each {|type|}), class: 'form-control' %><br>
 
       <%= f.label :request_date %><br>
       <%=  f.date_select :request_date, {:order => [:month, :day, :year],:prompt => true, :start_year => Time.now.year, :end_year => 2000}, class: 'form-control' %><br>
