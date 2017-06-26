@@ -1,4 +1,4 @@
-.login_div {
+.new-loan-div {
     position: absolute;
 
     width: 600px;
@@ -10,7 +10,7 @@
     margin-left: -150px;
 }
 
-.login_form {
+.new-loan-form {
     width: 500px;
     height: 500px;
 
@@ -23,3 +23,10 @@
 h2{
    text-align: center;
 }
+
+.loans-table {
+  margin-top: 50px;
+  margin-bottom: 50px;
+  border: 1px solid grey;
+}
+
