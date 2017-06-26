@@ -4,7 +4,6 @@ include CreateAmortizationScheduleWithEqualPayments
 class LoansController < ApplicationController
 	def new
 		@loan = Loan.new
-		@amortization_type = ["Equal payments","First month different payment"]
 	end
 
 	def create

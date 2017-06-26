@@ -14,10 +14,10 @@
       <%= f.text_field :interest_rate, class: 'form-control' %>
 
       <%= f.label :amortization_type %><br> 
-      <%= f.select :amortization_type, options_for_select(@amortization_type.each {|type|}), class: 'form-control' %><br>
+      <%= f.select :amortization_type, options_for_select(Loan::VALID_AMORTIZATION_TYPE.each {|type|}), class: 'form-control' %><br>
 
       <%= f.label :request_date %><br>
-      <%=  f.date_select :request_date, {:order => [:month, :day, :year],:prompt => true, :start_year => Time.now.year, :end_year => 2000}, class: 'form-control' %><br>
+      <%=  f.text_field :request_date, class: 'datepicker' %><br>
 
       <%= f.submit "Generate Amortization schedule", class: "btn btn-primary"  %>
 
