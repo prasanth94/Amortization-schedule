@@ -6,6 +6,7 @@
       <th>Interest rate</th>
       <th>Requested date</th>
       <th>Amortization type</th>
+      <th>Amortization Schedule</th>
     </tr>
   </thead>
   <tbody>
@@ -16,7 +17,7 @@
       <td><%= loan.interest_rate %></td>
       <td><%= loan.request_date %></td>
       <td><%= loan.amortization_type %></td>
-      </td>
+      <td><%= link_to "Get Amortization Schedule", generate_amortization_schedule_loan_path(loan) %></td>
     </tr>
   <% end %>
   </tbody>
