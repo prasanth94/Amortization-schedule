@@ -12,7 +12,7 @@ class Loan < ActiveRecord::Base
 	validate  :request_date_cannot_be_in_the_future
 
 	def request_date_cannot_be_in_the_future
-    errors.add(:request_date, "Request date can't be in the future") if (request_date.present?) && (request_date > Date.today)	
-  end
+      errors.add(:request_date, "Request date can't be in the future") if (request_date.present?) && (request_date > Date.today)	
+    end
 end
 		

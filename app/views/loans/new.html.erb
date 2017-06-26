@@ -2,7 +2,7 @@
 <div class="login_div">
   <div class="login_form">
 
-    <%= form_for @loan, url: {action: "generate_amortization_schedule"} do |f| %>
+    <%= form_for @loan do |f| %>
       <%= render 'shared/error_messages', object: @loan  %>
       <%= f.label :loan_amount %><br> 
       <%= f.text_field :loan_amount, class: 'form-control' %>
@@ -13,7 +13,7 @@
       <%= f.label :interest_rate %><br> 
       <%= f.text_field :interest_rate, class: 'form-control' %>
 
-      <%= f.label :amortization_type %><br>
+      <%= f.label :amortization_type %><br> 
       <%= f.select :amortization_type, options_for_select(@amortization_type.each {|type|}), class: 'form-control' %><br>
 
       <%= f.label :request_date %><br>

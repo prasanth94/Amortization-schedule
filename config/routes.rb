@@ -3,10 +3,14 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  resources :loans, only: [:new, :index]
+  resources :loans, only: [:new, :index, :create] do
+    member do
+      get 'generate_amortization_schedule'
+    end
+  end
+  
   root 'loans#new'
 
-  post   'loans/generate_amortization_schedule',   to: 'loans#generate_amortization_schedule'
   
 
   # Example of regular route:

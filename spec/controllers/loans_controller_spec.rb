@@ -10,7 +10,6 @@ RSpec.describe LoansController, type: :controller do
     it "renders the 'index' template" do
       expect(response).to render_template :index
     end
-
   end
 
   describe "#new" do
@@ -21,26 +20,22 @@ RSpec.describe LoansController, type: :controller do
     it "renders the 'index' template" do
       expect(response).to render_template :new
     end
-
   end
 
-  describe "#generate_amortization_schedule" do
-    
+  describe "#create" do
+   
     let(:params_for_create) { attributes_for(:loan) }
 
     it "redirects to the amortization_schedule page on successful Loan creation" do
-      post :generate_amortization_schedule, { loan: params_for_create }
-      expect(response).to render_template :generate_amortization_schedule
+      post :create, { loan: params_for_create }
+      loan = Loan.last
+      expect(response).to redirect_to generate_amortization_schedule_loan_path(loan)
     end
 
     it "creates a new loan" do
       expect {
-        post :generate_amortization_schedule, { loan: params_for_create }
+        post :create, { loan: params_for_create }
         }.to change(Loan, :count).by(1)
     end
-    
   end	
-
-
-
 end
