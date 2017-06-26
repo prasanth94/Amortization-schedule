@@ -1,23 +1,23 @@
 .new-loan-div {
-    position: absolute;
+	position: absolute;
 
-    width: 600px;
-    height: 600px;
+	width: 600px;
+	height: 600px;
 
-    top: 40%;
-    left: 43%;
-    margin-top: -150px;
-    margin-left: -150px;
+	top: 40%;
+	left: 43%;
+	margin-top: -150px;
+	margin-left: -150px;
 }
 
 .new-loan-form {
-    width: 500px;
-    height: 500px;
+	width: 500px;
+	height: 500px;
 
-    border-radius: 2x;
+	border-radius: 2x;
 
-    margin: 0;
-    padding: 0;
+	margin: 0;
+	padding: 0;
 }
 
 h2{
@@ -25,8 +25,18 @@ h2{
 }
 
 .loans-table {
-  margin-top: 50px;
-  margin-bottom: 50px;
-  border: 1px solid grey;
+  padding: 50px;
+}
+
+.loan-details{
+  padding: 30px;
+}
+
+.amortization-schedule{
+  padding: 30px;
+}
+
+table {
+	border: 1px solid grey;
 }
 
