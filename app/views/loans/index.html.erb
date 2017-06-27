@@ -1,26 +1,26 @@
 <div class="loans-table">
-<table class="table table-striped ">
-  <thead class="thead-default">
-    <tr>
-      <th>Loan Amount</th>
-      <th>Term</th>
-      <th>Interest rate</th>
-      <th>Requested date</th>
-      <th>Amortization type</th>
-      <th>Amortization Schedule</th>
-    </tr>
-  </thead>
-  <tbody>
-  <% @loans.each do |loan| %>
-    <tr>
-      <td><%= loan.loan_amount %></td>
-      <td><%= loan.term %></td>
-      <td><%= loan.interest_rate %></td>
-      <td><%= loan.request_date %></td>
-      <td><%= loan.amortization_type %></td>
-      <td><%= link_to "Get Amortization Schedule", generate_amortization_schedule_loan_path(loan) %></td>
-    </tr>
-  <% end %>
-  </tbody>
-</table>
+  <table class="table table-striped ">
+    <thead class="thead-default">
+      <tr>
+        <th>Loan Amount</th>
+        <th>Term</th>
+        <th>Interest rate</th>
+        <th>Requested date</th>
+        <th>Amortization type</th>
+        <th>Amortization Schedule</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @loans.each do |loan| %>
+      <tr>
+        <td><%= loan.loan_amount %></td>
+        <td><%= loan.term %></td>
+        <td><%= loan.interest_rate %></td>
+        <td><%= loan.request_date %></td>
+        <td><%= loan.amortization_type %></td>
+        <td><%= link_to "Get Amortization Schedule", generate_amortization_schedule_loan_path(loan) %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
 </div>

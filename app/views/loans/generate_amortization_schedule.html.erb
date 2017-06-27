@@ -1,52 +1,53 @@
 <div class="loan-details">
-<h3> Loan Details</h3>
-<table class="table table-bordered">
-  <thead class="thead-inverse">
-    <tr>
-      <th>Loan Amount</th>
-      <th>Term</th>
-      <th>Interest rate</th>
-      <th>Requested date</th>
-      <th>Amortization type</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><%= @loan.loan_amount %></td>
-      <td><%= @loan.term %></td>
-      <td><%= @loan.interest_rate %></td>
-      <td><%= @loan.request_date.strftime("%d %b %Y") %></td>
-       <td><%= @loan.amortization_type%></td>
-    </tr>
-  </tbody>
-</table>
+  <h3>Loan Details</h3>
+  <table class="table table-bordered">
+    <thead class="thead-inverse">
+      <tr>
+        <th>Loan Amount</th>
+        <th>Term</th>
+        <th>Interest rate</th>
+        <th>Requested date</th>
+        <th>Amortization type</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><%= @loan.loan_amount %></td>
+        <td><%= @loan.term %></td>
+        <td><%= @loan.interest_rate %></td>
+        <td><%= @loan.request_date.strftime("%d %b %Y") %></td>
+        <td><%= @loan.amortization_type%></td>
+      </tr>
+    </tbody>
+  </table>
 </div>
 
-
 <div class="amortization-schedule">
-<h3> Amortization Schedule of the Loan </h3>
-<table class="table table-bordered">
-  <thead class="thead-inverse">
-    <tr>
-      <th>Due Date</th>
-      <th>Beginning Balance</th>
-      <th>Payment Amount</th>
-      <th>Interest Componenet</th>
-      <th>Principal Componenet</th>
-      <th>Remaining Balance</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @amortization_schedule.each do |entry| %>
-    <tr>
-      <td><%= entry[:due_date].strftime("%d %b %Y") %></td>
-      <td><%= entry[:beginning_balance].round(2) %></td>
-      <td><%= entry[:monthly_payment].round(2) %></td>
-      <td><%= entry[:interest_component].round(2) %></td>
-      <td><%= entry[:principal_component].round(2) %></td>
-      <td><%= entry[:ending_balance].round(2) %></td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
+  <h3>
+    Amortization Schedule of the Loan
+  </h3>
+  <table class="table table-bordered">
+    <thead class="thead-inverse">
+      <tr>
+        <th>Due Date</th>
+        <th>Beginning Balance</th>
+        <th>Payment Amount</th>
+        <th>Interest Componenet</th>
+        <th>Principal Componenet</th>
+        <th>Remaining Balance</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @amortization_schedule.each do |entry| %>
+        <tr>
+          <td><%= entry[:due_date].strftime("%d %b %Y") %></td>
+          <td><%= entry[:beginning_balance].round(2) %></td>
+          <td><%= entry[:monthly_payment].round(2) %></td>
+          <td><%= entry[:interest_component].round(2) %></td>
+          <td><%= entry[:principal_component].round(2) %></td>
+          <td><%= entry[:ending_balance].round(2) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 </div>
