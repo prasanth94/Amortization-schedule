@@ -10,7 +10,10 @@ RSpec.describe CreateAmortizationScheduleWithDifferentFirstPayment do
 
     it 'returns the amortization schedule for the loan' do
       loan = build(:loan, loan_amount: 10_000, term: 24, interest_rate: 15, request_date: Date.new(2012, 0o5, 10))
-      amortization_schedule = dummy_class.create_amortization_schedule_with_different_first_payment(loan)
+      amortization_schedule = dummy_class.create_amortization_schedule_with_different_first_payment(principal_amount: loan.loan_amount,
+                                                                                                    term: loan.term,
+                                                                                                    interest_rate: loan.interest_rate,
+                                                                                                    request_date: loan.request_date)
 
       expect(amortization_schedule[0][:principal_component].round(2)).to be_equal 359.87
       expect(amortization_schedule[0][:beginning_balance].round(2)).to be_equal 10_000.00

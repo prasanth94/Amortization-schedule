@@ -1,13 +1,12 @@
 module CreateAmortizationScheduleWithDifferentFirstPayment
-  def create_amortization_schedule_with_different_first_payment(loan)
-    @loan = loan
+  def create_amortization_schedule_with_different_first_payment(principal_amount:, interest_rate:, term:, request_date:)
     @amortization_schedule_hash = []
-    @interest_per_period = @loan.interest_rate / (100 * 12)
-    @beginning_balance = @loan.loan_amount
-    @due_date = @loan.request_date
-    @monthly_payment = calculate_emi
+    @interest_per_period = interest_rate / (100 * 12)
+    @beginning_balance = principal_amount
+    @due_date = request_date
+    @monthly_payment = calculate_emi(principal_amount,term)
     calculate_first_month_amortization_schedule_with_different_first_payment
-    calculate_amortization_schedule_for_rest_of_months
+    calculate_amortization_schedule_for_rest_of_months(term)
     @amortization_schedule_hash
   end
 
@@ -24,8 +23,8 @@ module CreateAmortizationScheduleWithDifferentFirstPayment
     push_to_amortization_schedule_hash(first_month_payment_amount)
   end
 
-  def calculate_amortization_schedule_for_rest_of_months
-    (@loan.term - 1).times do
+  def calculate_amortization_schedule_for_rest_of_months(term)
+    (term - 1).times do
       @beginning_balance -= @principal_component
       @interest_component = @beginning_balance * @interest_per_period
       @principal_component = @monthly_payment - @interest_component
@@ -41,9 +40,9 @@ module CreateAmortizationScheduleWithDifferentFirstPayment
                                      monthly_payment: monthly_payment)
   end
 
-  def calculate_emi
-    ((@loan.loan_amount * @interest_per_period) * ((@interest_per_period + 1)**@loan.term)) /
-      (((@interest_per_period + 1)**@loan.term) - 1)
+  def calculate_emi(principal_amount,term)
+    ((principal_amount * @interest_per_period) * ((@interest_per_period + 1)**term)) /
+      (((@interest_per_period + 1)**term) - 1)
   end
 
   def find_next_due_date

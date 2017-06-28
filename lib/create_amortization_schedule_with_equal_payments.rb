@@ -1,18 +1,17 @@
 module CreateAmortizationScheduleWithEqualPayments
-  def create_amortization_schedule_with_equal_payments(loan)
-    @loan = loan
-    @interest_per_period = @loan.interest_rate / (100 * 12)
-    initialize_amortization_schedule_variables
-    @monthly_payment = calculate_emi
+  def create_amortization_schedule_with_equal_payments(principal_amount:, interest_rate:, term:, request_date:)
+    @interest_per_period = interest_rate / (100 * 12)
+    initialize_amortization_schedule_variables(principal_amount,request_date)
+    @monthly_payment = calculate_emi(principal_amount, term)
 
     calculate_first_month_amortization_schedule_with_equal_payment
-    calculate_amortization_schedule_for_rest_of_the_months_with_equal_payments
+    calculate_amortization_schedule_for_rest_of_the_months_with_equal_payments(term)
 
     until check_ending_balance_is_near_zero?
       @monthly_payment -= 0.001
-      initialize_amortization_schedule_variables
+      initialize_amortization_schedule_variables(principal_amount,request_date)
       calculate_first_month_amortization_schedule_with_equal_payment
-      calculate_amortization_schedule_for_rest_of_the_months_with_equal_payments
+      calculate_amortization_schedule_for_rest_of_the_months_with_equal_payments(term)
     end
 
     adjustments_in_last_payment_in_amortization_schedule
@@ -21,10 +20,10 @@ module CreateAmortizationScheduleWithEqualPayments
 
   private
 
-  def initialize_amortization_schedule_variables
+  def initialize_amortization_schedule_variables(principal_amount,request_date)
     @amortization_schedule_hash = []
-    @beginning_balance = @loan.loan_amount
-    @due_date = @loan.request_date
+    @beginning_balance = principal_amount
+    @due_date = request_date
   end
 
   def adjustments_in_last_payment_in_amortization_schedule
@@ -47,8 +46,8 @@ module CreateAmortizationScheduleWithEqualPayments
     push_to_amortization_schedule_hash_of_equal_payments
   end
 
-  def calculate_amortization_schedule_for_rest_of_the_months_with_equal_payments
-    (@loan.term - 1).times do
+  def calculate_amortization_schedule_for_rest_of_the_months_with_equal_payments(term)
+    (term - 1).times do
       @beginning_balance -= @principal_component
       @interest_component = @beginning_balance * @interest_per_period
       @principal_component = @monthly_payment - @interest_component
@@ -64,9 +63,9 @@ module CreateAmortizationScheduleWithEqualPayments
                                      monthly_payment: @monthly_payment)
   end
 
-  def calculate_emi
-    ((@loan.loan_amount * @interest_per_period) * ((@interest_per_period + 1)**@loan.term)) /
-      (((@interest_per_period + 1)**@loan.term) - 1)
+  def calculate_emi(principal_amount,term)
+    ((principal_amount * @interest_per_period) * ((@interest_per_period + 1)**term)) /
+      (((@interest_per_period + 1)**term) - 1)
   end
 
   def find_next_due_date

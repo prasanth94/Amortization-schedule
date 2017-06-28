@@ -10,7 +10,10 @@ RSpec.describe CreateAmortizationScheduleWithEqualPayments do
 
     it 'returns the amortization schedule for the loan' do
       loan = build(:loan, loan_amount: 10_000, term: 12, interest_rate: 10, request_date: Date.new(2017, 0o5, 15))
-      amortization_schedule = dummy_class.create_amortization_schedule_with_equal_payments(loan)
+      amortization_schedule = dummy_class.create_amortization_schedule_with_equal_payments(principal_amount: loan.loan_amount,
+                                                                                           term: loan.term,
+                                                                                           interest_rate: loan.interest_rate,
+                                                                                           request_date: loan.request_date)
 
       expect(amortization_schedule[0][:principal_component].round(2)).to be_equal 831.32
       expect(amortization_schedule[0][:beginning_balance].round(2)).to be_equal 10_000.00
