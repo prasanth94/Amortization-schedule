@@ -1,6 +1,3 @@
-include CreateAmortizationScheduleWithDifferentFirstPayment
-include CreateAmortizationScheduleWithEqualPayments
-
 class LoansController < ApplicationController
   def new
     @loan = Loan.new
@@ -17,7 +14,7 @@ class LoansController < ApplicationController
 
   def generate_amortization_schedule
     @loan = Loan.find(params[:id])
-    @amortization_schedule = find_amortization_schedule
+    @amortization_schedule = @loan.amortization_schedule
   end
 
   def index
@@ -28,15 +25,5 @@ class LoansController < ApplicationController
 
   def loan_params
     params.require(:loan).permit(:loan_amount, :term, :interest_rate, :request_date, :amortization_type)
-  end
-
-  def find_amortization_schedule
-    if @loan.amortization_type == 'First month different payment'
-      create_amortization_schedule_with_different_first_payment(principal_amount: @loan.loan_amount,
-                           interest_rate: @loan.interest_rate, term: @loan.term, request_date: @loan.request_date)
-    else
-      create_amortization_schedule_with_equal_payments(principal_amount: @loan.loan_amount,
-                           interest_rate: @loan.interest_rate, term: @loan.term, request_date: @loan.request_date)
-    end
   end
 end

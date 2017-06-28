@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'create_amortization_schedule_with_equal_payments'
 
 RSpec.describe Loan, type: :model do
   it { is_expected.to have_db_column(:loan_amount).of_type(:integer) }
@@ -35,6 +36,20 @@ RSpec.describe Loan, type: :model do
     it 'is valid with future date' do
       loan.request_date = '2100-06-25'
       expect(loan).not_to be_valid
+    end
+  end
+
+  describe 'amortization schedule' do
+    let(:loan) { build(:loan) }
+    it 'should call equal payment amortization schedule generator library if amortization type is Equal Payments' do
+      expect(loan).to receive(:create_amortization_schedule_with_equal_payments)
+      loan.amortization_schedule
+    end
+
+    it 'should call diffrent first payment amortization schedule generator library if amortization type is Diffrent first payment' do
+      loan.amortization_type = 'First month different payment'
+      expect(loan).to receive(:create_amortization_schedule_with_different_first_payment)
+      loan.amortization_schedule
     end
   end
 end
