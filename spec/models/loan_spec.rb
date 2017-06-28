@@ -41,14 +41,8 @@ RSpec.describe Loan, type: :model do
 
   describe 'amortization schedule' do
     let(:loan) { build(:loan) }
-    it 'should call equal payment amortization schedule generator library if amortization type is Equal Payments' do
-      expect(loan).to receive(:create_amortization_schedule_with_equal_payments)
-      loan.amortization_schedule
-    end
-
-    it 'should call diffrent first payment amortization schedule generator library if amortization type is Diffrent first payment' do
-      loan.amortization_type = 'First month different payment'
-      expect(loan).to receive(:create_amortization_schedule_with_different_first_payment)
+    it 'should invoke AmortizationScheduleGenerator sevice' do
+      expect_any_instance_of(AmortizationScheduleGenerator).to receive(:perform)
       loan.amortization_schedule
     end
   end
