@@ -1,16 +1,16 @@
 require 'rails_helper'
-require 'create_amortization_schedule_with_equal_payments'
+require 'equal_payments_amortization_schedule_creator'
 
-RSpec.describe CreateAmortizationScheduleWithEqualPayments do
-  describe 'CreateAmortizationScheduleWithEqualPayments' do
+RSpec.describe EqualPaymentsAmortizationScheduleCreator do
+  describe 'EqualPaymentsAmortizationScheduleCreator' do
     let(:dummy_class) { Class.new }
     before do
-      dummy_class.extend(CreateAmortizationScheduleWithEqualPayments)
+      dummy_class.extend(EqualPaymentsAmortizationScheduleCreator)
     end
 
     it 'returns the amortization schedule for the loan' do
       loan = build(:loan, loan_amount: 10_000, term: 12, interest_rate: 10, request_date: Date.new(2017, 0o5, 15))
-      amortization_schedule = dummy_class.create_amortization_schedule_with_equal_payments(principal_amount: loan.loan_amount,
+      amortization_schedule = dummy_class.equal_payments_amortization_schedule(principal_amount: loan.loan_amount,
                                                                                            term: loan.term,
                                                                                            interest_rate: loan.interest_rate,
                                                                                            request_date: loan.request_date)

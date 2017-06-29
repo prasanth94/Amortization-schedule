@@ -1,5 +1,5 @@
 require 'rails_helper'
-require 'create_amortization_schedule_with_equal_payments'
+require 'equal_payments_amortization_schedule_creator'
 
 RSpec.describe Loan, type: :model do
   it { is_expected.to have_db_column(:loan_amount).of_type(:integer) }

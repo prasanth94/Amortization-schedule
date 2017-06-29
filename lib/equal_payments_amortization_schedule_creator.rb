@@ -1,8 +1,8 @@
-module CreateAmortizationScheduleWithEqualPayments
-  def create_amortization_schedule_with_equal_payments(principal_amount:, interest_rate:, term:, request_date:)
+module EqualPaymentsAmortizationScheduleCreator
+  def equal_payments_amortization_schedule(principal_amount:, interest_rate:, term:, request_date:)
     @interest_per_period = interest_rate / (100 * 12)
     initialize_amortization_schedule_variables(principal_amount,request_date)
-    @monthly_payment = calculate_emi(principal_amount, term)
+    @monthly_payment = emi(principal_amount, term)
 
     calculate_first_month_amortization_schedule_with_equal_payment
     calculate_amortization_schedule_for_rest_of_the_months_with_equal_payments(term)
@@ -40,7 +40,7 @@ module CreateAmortizationScheduleWithEqualPayments
     number_of_days_for_interest_in_first_installment = 31 - @due_date.day
     interest_for_first_installment = @interest_per_period * (number_of_days_for_interest_in_first_installment.to_f / 30)
     @interest_component = @beginning_balance * interest_for_first_installment
-    find_next_due_date
+    next_due_date
     @principal_component = @monthly_payment - @interest_component
     @ending_balance = @beginning_balance - @principal_component
     push_to_amortization_schedule_hash_of_equal_payments
@@ -52,7 +52,7 @@ module CreateAmortizationScheduleWithEqualPayments
       @interest_component = @beginning_balance * @interest_per_period
       @principal_component = @monthly_payment - @interest_component
       @ending_balance = @beginning_balance - @principal_component
-      find_next_due_date
+      next_due_date
       push_to_amortization_schedule_hash_of_equal_payments
     end
   end
@@ -63,12 +63,12 @@ module CreateAmortizationScheduleWithEqualPayments
                                      monthly_payment: @monthly_payment)
   end
 
-  def calculate_emi(principal_amount,term)
+  def emi(principal_amount,term)
     ((principal_amount * @interest_per_period) * ((@interest_per_period + 1)**term)) /
       (((@interest_per_period + 1)**term) - 1)
   end
 
-  def find_next_due_date
+  def next_due_date
     @due_date = @due_date.next_month.at_beginning_of_month
   end
 end

@@ -13,14 +13,14 @@ RSpec.describe AmortizationScheduleGenerator do
     let(:loan) { build :loan }
     it 'should use equal payment amortization schedule generator library if amortization type is Equal Payments' do
       generator_service = AmortizationScheduleGenerator.new(loan)
-      expect(generator_service).to receive(:create_amortization_schedule_with_equal_payments)
+      expect(generator_service).to receive(:equal_payments_amortization_schedule)
       generator_service.perform
     end
 
     it 'should use different first payment amortization schedule generator library if amortization type is Different first payment' do
       loan.amortization_type = 'First month different payment'
       generator_service = AmortizationScheduleGenerator.new(loan)
-      expect(generator_service).to receive(:create_amortization_schedule_with_different_first_payment)
+      expect(generator_service).to receive(:different_first_payment_amortization_schedule)
       generator_service.perform
     end
   end

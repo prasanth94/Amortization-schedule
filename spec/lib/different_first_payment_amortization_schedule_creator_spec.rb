@@ -1,16 +1,16 @@
 require 'rails_helper'
-require 'create_amortization_schedule_with_different_first_payment'
+require 'different_first_payment_amortization_schedule_creator'
 
-RSpec.describe CreateAmortizationScheduleWithDifferentFirstPayment do
-  describe 'CreateAmortizationScheduleWithDifferentFirstPayment' do
+RSpec.describe DifferentFirstPaymentAmortizationScheduleCreator do
+  describe 'DifferentFirstPaymentAmortizationScheduleCreator' do
     let(:dummy_class) { Class.new }
     before do
-      dummy_class.extend(CreateAmortizationScheduleWithDifferentFirstPayment)
+      dummy_class.extend(DifferentFirstPaymentAmortizationScheduleCreator)
     end
 
     it 'returns the amortization schedule for the loan' do
       loan = build(:loan, loan_amount: 10_000, term: 24, interest_rate: 15, request_date: Date.new(2012, 0o5, 10))
-      amortization_schedule = dummy_class.create_amortization_schedule_with_different_first_payment(principal_amount: loan.loan_amount,
+      amortization_schedule = dummy_class.different_first_payment_amortization_schedule(principal_amount: loan.loan_amount,
                                                                                                     term: loan.term,
                                                                                                     interest_rate: loan.interest_rate,
                                                                                                     request_date: loan.request_date)
