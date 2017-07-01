@@ -42,8 +42,8 @@ RSpec.describe Loan, type: :model do
   describe 'amortization schedule' do
     let(:loan) { build(:loan) }
     it 'should invoke AmortizationScheduleGenerator sevice' do
-      expect_any_instance_of(AmortizationScheduleGenerator).to receive(:perform)
-      loan.amortization_schedule
+      expect_any_instance_of(AmortizationScheduleGenerator).to receive(:perform) { 'something' }
+      expect(loan.amortization_schedule).to eq('something')
     end
   end
 end
